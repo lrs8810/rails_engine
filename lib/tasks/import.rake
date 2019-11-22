@@ -38,12 +38,10 @@ namespace :import do
   task transactions: :environment do
     transaction_file = "data/transactions.csv"
 
-    def change_result(result)
-      result == "success"
-    end
-
     CSV.foreach(transaction_file, headers: true) do |row|
-      row['result'] = change_result(row['result'])
+
+      row[:result] = 0 if row[:result] == "success"
+      row[:result] = 1 if row[:result] == "failed"
       Transaction.create!(row.to_h)
     end
   end
