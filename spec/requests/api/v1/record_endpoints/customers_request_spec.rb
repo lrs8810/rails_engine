@@ -49,15 +49,15 @@ describe 'Customers API' do
     expect(customer_json['data']['attributes']['last_name']).to eq(customer.last_name)
   end
 
-  xit 'can find a customer by query param regardless of string case' do
+  it 'can find a customer by query param regardless of string case' do
     customer = create(:customer, first_name: "Sam", last_name: "Bee")
 
-    get "/api/v1/customers/find?name=#{customer.first_name.upcase}"
+    get "/api/v1/customers/find?first_name=#{customer.first_name.upcase}"
 
     customer_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(customer_json['data']['attributes']['name']).to eq(customer.name)
+    expect(customer_json['data']['attributes']['first_name']).to eq(customer.first_name)
   end
 
   it 'can find a customer by passing an id query param' do
@@ -159,7 +159,7 @@ describe 'Customers API' do
   end
 
   #Random finder
-  xit 'can return a random resource' do
+  it 'can return a random resource' do
     get "/api/v1/customers/random"
     customer_json = JSON.parse(response.body)
 
