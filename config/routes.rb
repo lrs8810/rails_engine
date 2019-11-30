@@ -9,6 +9,10 @@ Rails.application.routes.draw do
       end
 
       resources :merchants, only: [:index, :show]
+
+      scope :customers do
+        get '/find', to: 'customers#find'
+      end
       resources :customers, only: [:index, :show]
     end
   end
