@@ -27,64 +27,75 @@ describe 'Customers API' do
   end
 
   #Single finders
-  xit 'can find a merchant by passing a name query param' do
-    merchant = create(:merchant, name: "Laura's Shop")
+  it 'can find a customer by passing a first name query param' do
+    customer = create(:customer, first_name: "Sam", last_name: "Bee")
 
-    get "/api/v1/merchants/find?name=#{merchant.name}"
+    get "/api/v1/customers/find?first_name=#{customer.first_name}"
 
-    merchant_json = JSON.parse(response.body)
+    customer_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant_json['data']['attributes']['name']).to eq(merchant.name)
+    expect(customer_json['data']['attributes']['first_name']).to eq(customer.first_name)
   end
 
-  xit 'can find a merchant by query param regardless of string case' do
-    merchant = create(:merchant, name: "Laura's Shop")
+  it 'can find a customer by passing a last name query param' do
+    customer = create(:customer, first_name: "Sam", last_name: "Bee")
 
-    get "/api/v1/merchants/find?name=#{merchant.name.upcase}"
+    get "/api/v1/customers/find?last_name=#{customer.last_name}"
 
-    merchant_json = JSON.parse(response.body)
+    customer_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant_json['data']['attributes']['name']).to eq(merchant.name)
+    expect(customer_json['data']['attributes']['last_name']).to eq(customer.last_name)
   end
 
-  xit 'can find a merchant by passing an id query param' do
-    merchant = create(:merchant)
+  xit 'can find a customer by query param regardless of string case' do
+    customer = create(:customer, first_name: "Sam", last_name: "Bee")
 
-    get "/api/v1/merchants/find?id=#{merchant.id}"
+    get "/api/v1/customers/find?name=#{customer.first_name.upcase}"
 
-    merchant_json = JSON.parse(response.body)
+    customer_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant_json['data']['attributes']['id']).to eq(merchant.id)
+    expect(customer_json['data']['attributes']['name']).to eq(customer.name)
   end
 
-  xit 'can find a merchant by passing a created_at query param' do
-    merchant = Merchant.create!(name: "Laura's Shop", created_at: '2019-11-18', updated_at: '2019-11-29')
+  it 'can find a customer by passing an id query param' do
+    customer = create(:customer)
 
-    get "/api/v1/merchants/find?created_at=#{merchant.created_at}"
+    get "/api/v1/customers/find?id=#{customer.id}"
 
-    merchant_json = JSON.parse(response.body)
+    customer_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant_json['data']['id'].to_i).to eq(merchant.id)
+    expect(customer_json['data']['attributes']['id']).to eq(customer.id)
   end
 
-  xit 'can find a merchant by passing an updated_at query param' do
-    merchant = create(:merchant, name: "Laura's Shop", created_at: '2019-11-18', updated_at: '2019-11-29')
+  it 'can find a customer by passing a created_at query param' do
+    customer = create(:customer, created_at: '2019-11-18', updated_at: '2019-11-29')
 
-    get "/api/v1/merchants/find?updated_at=#{merchant.updated_at}"
+    get "/api/v1/customers/find?created_at=#{customer.created_at}"
 
-    merchant_json = JSON.parse(response.body)
+    customer_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant_json['data']['id'].to_i).to eq(merchant.id)
+    expect(customer_json['data']['id'].to_i).to eq(customer.id)
+  end
+
+  it 'can find a customer by passing an updated_at query param' do
+    customer = create(:customer, created_at: '2019-11-18', updated_at: '2019-11-29')
+
+    get "/api/v1/customers/find?updated_at=#{customer.updated_at}"
+
+    customer_json = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(customer_json['data']['id'].to_i).to eq(customer.id)
   end
 
   #Multi-finders
-  xit 'can find all merchants for a given name' do
-    merchant = create(:merchant, name: "Laura's Shop")
+  xit 'can find all customers for a given name' do
+    customer = create(:customer, name: "Laura's Shop")
     get "/api/v1/merchants/find_all?name=#{merchant.name}"
 
     merchant_json = JSON.parse(response.body)
