@@ -94,59 +94,76 @@ describe 'Customers API' do
   end
 
   #Multi-finders
-  xit 'can find all customers for a given name' do
-    customer = create(:customer, name: "Laura's Shop")
-    get "/api/v1/merchants/find_all?name=#{merchant.name}"
+  it 'can find all customers for a given first name' do
+    customer = create(:customer, first_name: "Sam")
+    create(:customer, first_name: "Sam" )
+    create(:customer, first_name: "Charlie")
 
-    merchant_json = JSON.parse(response.body)
+    get "/api/v1/customers/find_all?first_name=#{customer.first_name}"
+
+    customer_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant_json['data'].count).to eq(1)
+    expect(customer_json['data'].count).to eq(2)
   end
 
-  xit 'can find all merchants for a given id' do
-    merchant = create(:merchant, name: "Laura's Shop")
+  it 'can find all customers for a given last name' do
+    customer = create(:customer, last_name: "Bee")
+    create(:customer, last_name: "Bee" )
+    create(:customer, last_name: "Bee")
+    create(:customer, last_name: "Charlie")
 
-    get "/api/v1/merchants/find_all?id=#{merchant.id}"
+    get "/api/v1/customers/find_all?last_name=#{customer.last_name}"
 
-    merchant_json = JSON.parse(response.body)
+    customer_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant_json['data'].count).to eq(1)
+    expect(customer_json['data'].count).to eq(3)
   end
 
-  xit 'can find all merchants for a given created_at date' do
-    merchant_1 = create(:merchant, created_at: '2019-11-18', updated_at: '2019-11-29')
-    create(:merchant, created_at: '2019-11-18', updated_at: '2019-11-29')
-    create(:merchant, created_at: '2019-11-18', updated_at: '2019-11-29')
+  it 'can find all customers for a given id' do
+    customer = create(:customer, first_name: 'Sam', last_name: 'Bee')
 
-    get "/api/v1/merchants/find_all?created_at=#{merchant_1.created_at}"
+    get "/api/v1/customers/find_all?id=#{customer.id}"
 
-    merchant_json = JSON.parse(response.body)
+    customer_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant_json['data'].count).to eq(3)
+    expect(customer_json['data'].count).to eq(1)
   end
 
-  xit 'can find all merchants for a given updated_at date' do
-    merchant_1 = create(:merchant, created_at: '2019-11-18', updated_at: '2019-11-20')
-    create(:merchant, created_at: '2019-11-18', updated_at: '2019-11-20')
-    create(:merchant, created_at: '2019-11-18', updated_at: '2019-11-29')
+  it 'can find all customers for a given created_at date' do
+    customer_1 = create(:customer, created_at: '2019-11-18', updated_at: '2019-11-29')
+    create(:customer, created_at: '2019-11-18', updated_at: '2019-11-29')
+    create(:customer, created_at: '2019-11-18', updated_at: '2019-11-29')
 
-    get "/api/v1/merchants/find_all?updated_at=#{merchant_1.updated_at}"
+    get "/api/v1/customers/find_all?created_at=#{customer_1.created_at}"
 
-    merchant_json = JSON.parse(response.body)
+    customer_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant_json['data'].count).to eq(2)
+    expect(customer_json['data'].count).to eq(3)
+  end
+
+  it 'can find all customers for a given updated_at date' do
+    customer_1 = create(:customer, created_at: '2019-11-18', updated_at: '2019-11-20')
+    create(:customer, created_at: '2019-11-18', updated_at: '2019-11-20')
+    create(:customer, created_at: '2019-11-18', updated_at: '2019-11-29')
+
+    get "/api/v1/customers/find_all?updated_at=#{customer_1.updated_at}"
+
+    customer_json = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(customer_json['data'].count).to eq(2)
   end
 
   #Random finder
   xit 'can return a random resource' do
-    get "/api/v1/merchants/random"
-    merchant_json = JSON.parse(response.body)
+    get "/api/v1/customers/random"
+    customer_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant_json.count).to eq(1)
+    expect(customer_json.count).to eq(1)
   end
 end
