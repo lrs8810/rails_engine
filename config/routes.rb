@@ -16,6 +16,9 @@ Rails.application.routes.draw do
         get 'random', to: 'customers#random'
       end
       resources :customers, only: [:index, :show]
+
+      
+      resources :items, only: [:index, :show]
     end
   end
 end
