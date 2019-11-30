@@ -129,4 +129,13 @@ describe 'Merchants API' do
     expect(response).to be_successful
     expect(merchant_json['data'].count).to eq(2)
   end
+
+  #Random finder
+  it 'can return a random resource' do
+    get "/api/v1/merchants/random"
+    merchant_json = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(merchant_json.count).to eq(1)
+  end
 end
