@@ -1,6 +1,6 @@
 class CreateCustomers < ActiveRecord::Migration[5.2]
   def change
-  enable_extension("citext")
+    enable_extension("citext")
 
     create_table :customers do |t|
       t.citext :first_name
