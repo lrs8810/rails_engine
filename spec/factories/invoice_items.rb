@@ -6,5 +6,3 @@ FactoryBot.define do
     item
   end
 end
-
-FactoryBot.rewind_sequences
