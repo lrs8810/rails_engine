@@ -27,40 +27,40 @@ describe 'Items API' do
   end
 
   #Single finders
-  xit 'can find a item by passing a first name query param' do
-    item = create(:item, first_name: "Sam", last_name: "Bee")
+  it 'can find a item by passing a name query param' do
+    item = create(:item, name: "Leash")
 
-    get "/api/v1/items/find?first_name=#{item.first_name}"
-
-    item_json = JSON.parse(response.body)
-
-    expect(response).to be_successful
-    expect(item_json['data']['attributes']['first_name']).to eq(item.first_name)
-  end
-
-  xit 'can find a item by passing a last name query param' do
-    item = create(:item, first_name: "Sam", last_name: "Bee")
-
-    get "/api/v1/items/find?last_name=#{item.last_name}"
+    get "/api/v1/items/find?name=#{item.name}"
 
     item_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(item_json['data']['attributes']['last_name']).to eq(item.last_name)
+    expect(item_json['data']['attributes']['name']).to eq(item.name)
   end
 
-  xit 'can find a item by query param regardless of string case' do
-    item = create(:item, first_name: "Sam", last_name: "Bee")
+  it 'can find a item by passing a description query param' do
+    item = create(:item, description: "This is the best item on our site")
 
-    get "/api/v1/items/find?first_name=#{item.first_name.upcase}"
+    get "/api/v1/items/find?description=#{item.description}"
 
     item_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(item_json['data']['attributes']['first_name']).to eq(item.first_name)
+    expect(item_json['data']['attributes']['description']).to eq(item.description)
   end
 
-  xit 'can find a item by passing an id query param' do
+  it 'can find a item by query param regardless of string case' do
+    item = create(:item, name: 'Lease')
+
+    get "/api/v1/items/find?name=#{item.name.upcase}"
+
+    item_json = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(item_json['data']['attributes']['name']).to eq(item.name)
+  end
+
+  it 'can find a item by passing an id query param' do
     item = create(:item)
 
     get "/api/v1/items/find?id=#{item.id}"
@@ -71,8 +71,32 @@ describe 'Items API' do
     expect(item_json['data']['attributes']['id']).to eq(item.id)
   end
 
-  xit 'can find a item by passing a created_at query param' do
+  it 'can find a item by passing an unit_price query param' do
+    item = create(:item, unit_price: "253.40")
+
+    get "/api/v1/items/find?unit_price=#{item.unit_price}"
+
+    item_json = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(item_json['data']['attributes']['unit_price']).to eq(item.unit_price)
+  end
+
+  it 'can find a item by passing a merchant_id query param' do
+    merchant_id = create(:merchant).id
+    item = create(:item, merchant_id: merchant_id)
+
+    get "/api/v1/items/find?merchant_id=#{item.merchant_id}"
+
+    item_json = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(item_json['data']['attributes']['merchant_id']).to eq(item.merchant_id)
+  end
+
+  it 'can find a item by passing a created_at query param' do
     item = create(:item, created_at: '2019-11-18', updated_at: '2019-11-29')
+    create(:item, created_at: '2019-11-18', updated_at: '2019-11-29')
 
     get "/api/v1/items/find?created_at=#{item.created_at}"
 
@@ -82,88 +106,103 @@ describe 'Items API' do
     expect(item_json['data']['id'].to_i).to eq(item.id)
   end
 
-  xit 'can find a item by passing an updated_at query param' do
+  it 'can find a item by passing an updated_at query param' do
     item = create(:item, created_at: '2019-11-18', updated_at: '2019-11-29')
+    create(:item, created_at: '2019-11-18', updated_at: '2019-11-29')
 
     get "/api/v1/items/find?updated_at=#{item.updated_at}"
 
     item_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(item_json['data']['id'].to_i).to eq(customer.id)
+    expect(item_json['data']['id'].to_i).to eq(item.id)
   end
 
   #Multi-finders
-  xit 'can find all customers for a given first name' do
-    customer = create(:customer, first_name: "Sam")
-    create(:customer, first_name: "Sam" )
-    create(:customer, first_name: "Charlie")
+  it 'can find all items for a given name' do
+    item = create(:item, name: "Leash")
+    create(:item, name: "Leash" )
+    create(:item, name: "Squeaky toy")
 
-    get "/api/v1/customers/find_all?first_name=#{customer.first_name}"
+    get "/api/v1/items/find_all?name=#{item.name}"
 
-    customer_json = JSON.parse(response.body)
+    item_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(customer_json['data'].count).to eq(2)
+    expect(item_json['data'].count).to eq(2)
   end
 
-  xit 'can find all customers for a given last name' do
-    customer = create(:customer, last_name: "Bee")
-    create(:customer, last_name: "Bee" )
-    create(:customer, last_name: "Bee")
-    create(:customer, last_name: "Charlie")
+  it 'can find all items for a given description' do
+    item = create(:item, description: "This is the best item on the market")
+    create(:item, description: "This is the best item on the market" )
+    create(:item, description: "This is the best item on the market")
+    create(:item, description: "It's okay")
 
-    get "/api/v1/customers/find_all?last_name=#{customer.last_name}"
+    get "/api/v1/items/find_all?description=#{item.description}"
 
-    customer_json = JSON.parse(response.body)
+    item_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(customer_json['data'].count).to eq(3)
+    expect(item_json['data'].count).to eq(3)
   end
 
-  xit 'can find all customers for a given id' do
-    customer = create(:customer, first_name: 'Sam', last_name: 'Bee')
+  it 'can find all items for a given id' do
+    item = create(:item, name: 'Leash')
 
-    get "/api/v1/customers/find_all?id=#{customer.id}"
+    get "/api/v1/items/find_all?id=#{item.id}"
 
-    customer_json = JSON.parse(response.body)
+    item_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(customer_json['data'].count).to eq(1)
+    expect(item_json['data'].count).to eq(1)
   end
 
-  xit 'can find all customers for a given created_at date' do
-    customer_1 = create(:customer, created_at: '2019-11-18', updated_at: '2019-11-29')
-    create(:customer, created_at: '2019-11-18', updated_at: '2019-11-29')
-    create(:customer, created_at: '2019-11-18', updated_at: '2019-11-29')
+  it 'can find all items for a given merchant_id' do
+    merchant_id = create(:merchant).id
+    item = create(:item, name: 'Leash', merchant_id: merchant_id)
+    create(:item, name: 'Chew Toy', merchant_id: merchant_id)
+    create(:item, name: 'Frisbee', merchant_id: merchant_id)
 
-    get "/api/v1/customers/find_all?created_at=#{customer_1.created_at}"
+    get "/api/v1/items/find_all?merchant_id=#{item.merchant_id}"
 
-    customer_json = JSON.parse(response.body)
+    item_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(customer_json['data'].count).to eq(3)
+    expect(item_json['data'].count).to eq(3)
   end
 
-  xit 'can find all customers for a given updated_at date' do
-    customer_1 = create(:customer, created_at: '2019-11-18', updated_at: '2019-11-20')
-    create(:customer, created_at: '2019-11-18', updated_at: '2019-11-20')
-    create(:customer, created_at: '2019-11-18', updated_at: '2019-11-29')
+  it 'can find all items for a given created_at date' do
+    item_1 = create(:item, created_at: '2019-11-18', updated_at: '2019-11-29')
+    create(:item, created_at: '2019-11-18', updated_at: '2019-11-29')
+    create(:item, created_at: '2019-11-18', updated_at: '2019-11-29')
 
-    get "/api/v1/customers/find_all?updated_at=#{customer_1.updated_at}"
+    get "/api/v1/items/find_all?created_at=#{item_1.created_at}"
 
-    customer_json = JSON.parse(response.body)
+    item_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(customer_json['data'].count).to eq(2)
+    expect(item_json['data'].count).to eq(3)
+  end
+
+  it 'can find all items for a given updated_at date' do
+    item_1 = create(:item, created_at: '2019-11-18', updated_at: '2019-11-20')
+    create(:item, created_at: '2019-11-18', updated_at: '2019-11-20')
+    create(:item, created_at: '2019-11-18', updated_at: '2019-11-29')
+
+    get "/api/v1/items/find_all?updated_at=#{item_1.updated_at}"
+
+    item_json = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(item_json['data'].count).to eq(2)
   end
 
   #Random finder
-  xit 'can return a random resource' do
-    get "/api/v1/customers/random"
-    customer_json = JSON.parse(response.body)
+  it 'can return a random resource' do
+    get "/api/v1/items/random"
+    item_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(customer_json.count).to eq(1)
+    expect(item_json.count).to eq(1)
   end
 end
