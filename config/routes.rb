@@ -33,7 +33,15 @@ Rails.application.routes.draw do
         get '/find_all', to: 'invoices#find_all'
         get '/random', to: 'invoices#random'
       end
-      resources :invoices, only: [:index, :show]
+      resources :invoices, only: [:index, :show] do
+        scope module: :invoices do
+          resources :transactions, only: :index
+          resources :invoice_items, only: :index
+          resources :items, only: :index
+          resources :customer, only: :index
+          resources :merchant, only: :index
+        end 
+      end
 
       scope :transactions do
         get '/find', to: 'transactions#find'
