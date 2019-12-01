@@ -8,11 +8,11 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def find
-    render json: ItemSerializer.new(Item.find_by(request.query_parameters))
+    render json: ItemSerializer.new(Item.order(:id).find_by(request.query_parameters))
   end
 
   def find_all
-    render json: ItemSerializer.new(Item.where(request.query_parameters))
+    render json: ItemSerializer.new(Item.where(request.query_parameters).order(:id))
   end
 
   def random
