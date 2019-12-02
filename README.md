@@ -24,3 +24,9 @@
 ``GET /api/v1/customers/:id/transactions returns a collection of associated transactions``
 
 #### Business Intelligence Endpoints
+##### All Merchants
+``GET /api/v1/merchants/most_revenue?quantity=x returns the top x merchants ranked by total revenue``<br>
+``GET /api/v1/merchants/revenue?date=x returns the total revenue for date x across all merchants``
+
+##### Single Merchant
+``GET /api/v1/merchants/:id/favorite_customer returns the customer who has conducted the most total number of successful transactions.``
