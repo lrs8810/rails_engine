@@ -15,6 +15,16 @@ cd rails_engine
 bundle
 ````
 
+## Usage
+Run the tests with RSpec: 
+````
+rspec
+````
+Run Rails Engine against the Spec Harness: 
+````
+rake
+````
+
 ## API Endpoints
 #### Record Endpoints
 ``GET /api/v1/merchants/index``<br>
