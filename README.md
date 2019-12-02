@@ -4,7 +4,7 @@
 ``GET /api/v1/merchants/show``<br>
 ``GET /api/v1/merchants/find?name=``<br>
 ``GET /api/v1/merchants/find_all?name=``<br>
-``Get /api/v1/merchants/random``
+``GET /api/v1/merchants/random``
 
 #### Relationship Endpoints
 ##### Merchants
