@@ -47,8 +47,16 @@ bundle exec rake
 ````
 
 ## API Endpoints
-#### Record Endpoints
+#### Resources
+* Customers
+* Merchants
+* Items
+* Invoices
+* InvoiceItems
+* Transactions
 
+#### Record Endpoints
+There are record endpoints for each for each of the six resources. Below is an example based on the Merchant resource. 
  
 ``GET /api/v1/merchants/index`` returns of all the resource records <br>
 ``GET /api/v1/merchants/show`` returns a single merchant resource based on id <br>
