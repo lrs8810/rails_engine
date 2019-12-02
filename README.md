@@ -10,7 +10,7 @@ Rails 5.2.3
 ## Installation 
 To use this repository, clone the repo onto your local machine by running the following commands in your terminal: 
 ````
-git clone https://github.com/lrs8810/rails_engine
+git@github.com:lrs8810/rails_engine.git
 cd rails_engine
 bundle
 ````
