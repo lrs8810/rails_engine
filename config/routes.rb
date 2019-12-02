@@ -40,7 +40,7 @@ Rails.application.routes.draw do
           resources :items, only: :index
           resources :customer, only: :index
           resources :merchant, only: :index
-        end 
+        end
       end
 
       scope :transactions do
@@ -55,7 +55,12 @@ Rails.application.routes.draw do
         get '/find_all', to: 'invoice_items#find_all'
         get '/random', to: 'invoice_items#random'
       end
-      resources :invoice_items, only: [:index, :show]
+      resources :invoice_items, only: [:index, :show] do
+        scope module: :invoice_items do
+          resources :invoice, only: :index
+          resources :item, only: :index
+        end
+      end
     end
   end
 end
