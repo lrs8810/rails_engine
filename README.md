@@ -1,6 +1,8 @@
 # Rails Engine
 Rails Engine was a week 1, solo-project utilizing Rails and ActiveRecord to build a JSON API which exposes the SalesEngine data schema. 
 
+<img width="1015" src="https://i.imgur.com/eqxA9ww.png">
+
 ## Ruby and Rails Version
 ````
 Ruby 2.4.1
