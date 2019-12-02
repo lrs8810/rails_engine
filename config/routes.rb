@@ -22,6 +22,7 @@ Rails.application.routes.draw do
         get '/find_all', to: 'search#index'
         get 'random', to: 'random#show'
       end
+
       resources :customers, only: [:index, :show] do
         scope module: :customers do
           resources :invoices, only: :index
@@ -29,11 +30,12 @@ Rails.application.routes.draw do
         end
       end
 
-      scope :items do
-        get '/find', to: 'items#find'
-        get '/find_all', to: 'items#find_all'
-        get '/random', to: 'items#random'
+      scope :items, module: :items do
+        get '/find', to: 'search#show'
+        get '/find_all', to: 'search#index'
+        get '/random', to: 'random#show'
       end
+
       resources :items, only: [:index, :show] do
         scope module: :items do
           resources :invoice_items, only: :index
