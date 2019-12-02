@@ -67,10 +67,10 @@ Rails.application.routes.draw do
         end
       end
 
-      scope :invoice_items do
-        get '/find', to: 'invoice_items#find'
-        get '/find_all', to: 'invoice_items#find_all'
-        get '/random', to: 'invoice_items#random'
+      scope :invoice_items, module: :invoice_items do
+        get '/find', to: 'search#show'
+        get '/find_all', to: 'search#index'
+        get '/random', to: 'random#show'
       end
       resources :invoice_items, only: [:index, :show] do
         scope module: :invoice_items do
