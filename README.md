@@ -49,11 +49,11 @@ bundle exec rake
 ## API Endpoints
 #### Record Endpoints
 
-
-``GET /api/v1/merchants/index``<br> returns of all the resource records
-``GET /api/v1/merchants/show``<br> returns a single merchant resource based on id
-``GET /api/v1/merchants/find?name=Hand-Spencer``<br> returns a single resource record based on query parameters
-``GET /api/v1/merchants/find_all?name=Hand-Spencer``<br> returns a collection of resource records based on query parameters
+ 
+``GET /api/v1/merchants/index`` returns of all the resource records <br>
+``GET /api/v1/merchants/show`` returns a single merchant resource based on id <br>
+``GET /api/v1/merchants/find?name=Hand-Spencer`` returns a single resource record based on query parameters <br>
+``GET /api/v1/merchants/find_all?name=Hand-Spencer`` returns a collection of resource records based on query parameters <br>
 ``GET /api/v1/merchants/random`` returns a single resource record based on sample from the resource
 
 #### Relationship Endpoints
