@@ -58,10 +58,10 @@ Rails.application.routes.draw do
         end
       end
 
-      scope :transactions do
-        get '/find', to: 'transactions#find'
-        get '/find_all', to: 'transactions#find_all'
-        get '/random', to: 'transactions#random'
+      scope :transactions, module: :transactions do
+        get '/find', to: 'search#show'
+        get '/find_all', to: 'search#index'
+        get '/random', to: 'random#show'
       end
       resources :transactions, only: [:index, :show] do
         scope module: :transactions do
