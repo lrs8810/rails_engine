@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Invoices Relationships API' do
   it 'returns a collection of transactions for a specific invoice' do
+    FactoryBot.rewind_sequences
     invoice = create(:invoice, :with_transactions)
     create(:invoice, :with_transactions)
 
