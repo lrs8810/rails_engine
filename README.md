@@ -3,8 +3,8 @@ Rails Engine was a week 1, solo-project utilizing Rails and ActiveRecord to buil
 
 ## Ruby and Rails Version
 ````
-Rails 5.2.3
 Ruby 2.4.1
+Rails 5.2.3
 ````
 
 ## Installation 
