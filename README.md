@@ -1,4 +1,10 @@
 # Rails Engine
+Rails Engine was a week 1, solo-project utilizing Rails and ActiveRecord to build a JSON API which exposes the SalesEngine data schema. 
+
+## Installation 
+
+
+## API Endpoints
 #### Record Endpoints
 ``GET /api/v1/merchants/index``<br>
 ``GET /api/v1/merchants/show``<br>
