@@ -1,8 +1,19 @@
 # Rails Engine
 Rails Engine was a week 1, solo-project utilizing Rails and ActiveRecord to build a JSON API which exposes the SalesEngine data schema. 
 
-## Installation 
+## Ruby and Rails Version
+````
+Rails 5.2.3
+Ruby 2.4.1
+````
 
+## Installation 
+To use this repository, clone the repo onto your local machine by running the following commands in your terminal: 
+````
+git clone https://github.com/lrs8810/rails_engine
+cd rails_engine
+bundle
+````
 
 ## API Endpoints
 #### Record Endpoints
