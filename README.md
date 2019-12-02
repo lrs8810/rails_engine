@@ -32,11 +32,13 @@ rake import:transactions
 ````
 
 ## Usage
+#### RSpec
 To see test coverage, run the tests with RSpec from the root of `rails_engine`: 
 ````
 cd rails_engine
 rspec
 ````
+#### Rales Engine Spec Harness
 First, clone the Spec Harness into the same overall directory as your `rails_engine` so the two repos are next to one another.  [Spec Harness instructions](https://github.com/turingschool/rales_engine_spec_harness)<br>
 Second, run `rails_engine` against the Spec Harness: 
 ````
