@@ -16,24 +16,45 @@ git@github.com:lrs8810/rails_engine.git
 cd rails_engine
 bundle
 ````
+Set up the development database by running the following commangs from the Rails Engine directory in your terminal:
+````
+rails db:create
+rails db:migrate
+````
+Import rake tasks by running the following commands from the Rails Engine directory in your terminal: 
+````
+rake import:customers
+rake import:merchants
+rake import:items
+rake import:invoices
+rake import:invoice_items
+rake import:transactions
+````
 
 ## Usage
-Run the tests with RSpec: 
+To see test coverage, run the tests with RSpec from the Rails Engine directory: 
 ````
+cd rails_engine
 rspec
 ````
 Run Rails Engine against the Spec Harness: 
 ````
-rake
+cd rails_engine
+rails s (to start localhost server)
+open a new terminal window (cmd + T for Mac)
+cd rales_engine_spec_harness
+bundle exec rake 
 ````
 
 ## API Endpoints
 #### Record Endpoints
-``GET /api/v1/merchants/index``<br>
-``GET /api/v1/merchants/show``<br>
-``GET /api/v1/merchants/find?name=``<br>
-``GET /api/v1/merchants/find_all?name=``<br>
-``GET /api/v1/merchants/random``
+
+
+``GET /api/v1/merchants/index``<br> returns of all the resource records
+``GET /api/v1/merchants/show``<br> returns a single merchant resource based on id
+``GET /api/v1/merchants/find?name=Hand-Spencer``<br> returns a single resource record based on query parameters
+``GET /api/v1/merchants/find_all?name=Hand-Spencer``<br> returns a collection of resource records based on query parameters
+``GET /api/v1/merchants/random`` returns a single resource record based on sample from the resource
 
 #### Relationship Endpoints
 ##### Merchants
