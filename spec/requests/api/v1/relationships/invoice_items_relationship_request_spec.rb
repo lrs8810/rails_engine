@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'InvoiceItemss Relationships API' do
+describe 'InvoiceItems Relationships API' do
   it 'returns the associated invoice for a specific invoice_item' do
     invoice_item = create(:invoice_item)
     invoice_id = invoice_item.invoice_id
