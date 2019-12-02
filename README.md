@@ -16,12 +16,12 @@ git@github.com:lrs8810/rails_engine.git
 cd rails_engine
 bundle
 ````
-Set up the development database by running the following commangs from the Rails Engine directory in your terminal:
+Set up the development database by running the following commands from the root of your project directory:
 ````
 rails db:create
 rails db:migrate
 ````
-Import rake tasks by running the following commands from the Rails Engine directory in your terminal: 
+Import rake tasks by running the following commands from the root of your project directory: 
 ````
 rake import:customers
 rake import:merchants
@@ -32,7 +32,7 @@ rake import:transactions
 ````
 
 ## Usage
-To see test coverage, run the tests with RSpec from the Rails Engine directory: 
+To see test coverage, run the tests with RSpec from the root of your project: 
 ````
 cd rails_engine
 rspec
