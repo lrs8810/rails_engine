@@ -79,7 +79,7 @@ describe 'Items API' do
     item_json = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(item_json['data']['attributes']['unit_price']).to eq(item.unit_price)
+    expect(item_json['data']['attributes']['unit_price']).to eq(item.unit_price.to_s)
   end
 
   it 'can find a item by passing a merchant_id query param' do

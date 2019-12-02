@@ -2,11 +2,14 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api do
     namespace :v1 do
-      scope :merchants do
-        get '/find', to: 'merchants#find'
-        get '/find_all', to: 'merchants#find_all'
-        get '/random', to: 'merchants#random'
+      scope :merchants, module: :merchants do
+        get '/find', to: 'search#show'
+        get '/find_all', to: 'search#index'
+        get '/random', to: 'random#show'
+        get '/most_revenue', to: 'most_revenue#index'
+        get '/:merchant_id/favorite_customer', to: 'favorite_customer#show'
       end
+
       resources :merchants, only: [:index, :show] do
         scope module: :merchants do
           resources :items, only: :index
@@ -14,11 +17,12 @@ Rails.application.routes.draw do
         end
       end
 
-      scope :customers do
-        get '/find', to: 'customers#find'
-        get '/find_all', to: 'customers#find_all'
-        get 'random', to: 'customers#random'
+      scope :customers, module: :customers do
+        get '/find', to: 'search#show'
+        get '/find_all', to: 'search#index'
+        get 'random', to: 'random#show'
       end
+
       resources :customers, only: [:index, :show] do
         scope module: :customers do
           resources :invoices, only: :index
@@ -26,11 +30,12 @@ Rails.application.routes.draw do
         end
       end
 
-      scope :items do
-        get '/find', to: 'items#find'
-        get '/find_all', to: 'items#find_all'
-        get '/random', to: 'items#random'
+      scope :items, module: :items do
+        get '/find', to: 'search#show'
+        get '/find_all', to: 'search#index'
+        get '/random', to: 'random#show'
       end
+
       resources :items, only: [:index, :show] do
         scope module: :items do
           resources :invoice_items, only: :index
@@ -38,10 +43,10 @@ Rails.application.routes.draw do
         end
       end
 
-      scope :invoices do
-        get '/find', to: 'invoices#find'
-        get '/find_all', to: 'invoices#find_all'
-        get '/random', to: 'invoices#random'
+      scope :invoices, module: :invoices do
+        get '/find', to: 'search#show'
+        get '/find_all', to: 'search#index'
+        get '/random', to: 'random#show'
       end
       resources :invoices, only: [:index, :show] do
         scope module: :invoices do
@@ -53,10 +58,10 @@ Rails.application.routes.draw do
         end
       end
 
-      scope :transactions do
-        get '/find', to: 'transactions#find'
-        get '/find_all', to: 'transactions#find_all'
-        get '/random', to: 'transactions#random'
+      scope :transactions, module: :transactions do
+        get '/find', to: 'search#show'
+        get '/find_all', to: 'search#index'
+        get '/random', to: 'random#show'
       end
       resources :transactions, only: [:index, :show] do
         scope module: :transactions do
@@ -64,10 +69,10 @@ Rails.application.routes.draw do
         end
       end
 
-      scope :invoice_items do
-        get '/find', to: 'invoice_items#find'
-        get '/find_all', to: 'invoice_items#find_all'
-        get '/random', to: 'invoice_items#random'
+      scope :invoice_items, module: :invoice_items do
+        get '/find', to: 'search#show'
+        get '/find_all', to: 'search#index'
+        get '/random', to: 'random#show'
       end
       resources :invoice_items, only: [:index, :show] do
         scope module: :invoice_items do
