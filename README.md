@@ -16,12 +16,12 @@ git@github.com:lrs8810/rails_engine.git
 cd rails_engine
 bundle
 ````
-Set up the development database by running the following commands from the root of your project directory:
+Set up the development database by running the following commands from the root of your `rails_engine` directory:
 ````
 rails db:create
 rails db:migrate
 ````
-Import rake tasks by running the following commands from the root of your project directory: 
+Import rake tasks by running the following commands from the root of your `rails_engine` directory: 
 ````
 rake import:customers
 rake import:merchants
@@ -32,12 +32,13 @@ rake import:transactions
 ````
 
 ## Usage
-To see test coverage, run the tests with RSpec from the root of your project: 
+To see test coverage, run the tests with RSpec from the root of `rails_engine`: 
 ````
 cd rails_engine
 rspec
 ````
-Run Rails Engine against the Spec Harness: 
+First, clone the Spec Harness into the same overall directory as your `rails_engine` so the two repos are next to one another.  [Spec Harness instructions](https://github.com/turingschool/rales_engine_spec_harness)<br>
+Second, run `rails_engine` against the Spec Harness: 
 ````
 cd rails_engine
 rails s (to start localhost server)
