@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         get '/find_all', to: 'search#index'
         get '/random', to: 'random#show'
         get '/most_revenue', to: 'most_revenue#index'
+        get '/:merchant_id/favorite_customer', to: 'favorite_customer#show'
       end
 
       resources :merchants, only: [:index, :show] do
@@ -16,10 +17,10 @@ Rails.application.routes.draw do
         end
       end
 
-      scope :customers do
-        get '/find', to: 'customers#find'
-        get '/find_all', to: 'customers#find_all'
-        get 'random', to: 'customers#random'
+      scope :customers, module: :customers do
+        get '/find', to: 'search#show'
+        get '/find_all', to: 'search#index'
+        get 'random', to: 'random#show'
       end
       resources :customers, only: [:index, :show] do
         scope module: :customers do
